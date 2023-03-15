@@ -1,5 +1,7 @@
 import React, { Component} from "react";
 
+
+
 class MovieForm extends Component {
 
     //constructors are initialized when Form is created (instantiated)
@@ -15,11 +17,12 @@ class MovieForm extends Component {
             imdbRating: '',
             director: '',
             year: '',
-            dateAdded: '',
-            date: new Date().toString()
+            dateAdded:`${new Date()}`
+          
         };
     //set our initial state to state.
     this.state = this.initialState;
+    }
 
     handleChange = event => {
         //get name, value out of target (element that changed)
@@ -42,11 +45,8 @@ class MovieForm extends Component {
         //clear inputs by setting forms to initial state
         this.initialState.date = newDate;
         this.setState(this.initialState);
-
-
-}
-
-render() {
+    }
+render(){
     //hook in data from state
     const { title, actors, plot, imdbRating, director, year, dateAdded } = this.state;
     return (
@@ -114,4 +114,5 @@ render() {
     )
 };
 };
+
 export default MovieForm

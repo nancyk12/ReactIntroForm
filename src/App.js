@@ -55,7 +55,7 @@ class App extends Component {
     }
 
     // create simple funciton here to remove movie
-removeAllMovies = (index) => {
+removeMovie = (index) => {
     // now that we've defined this.state, we can use
         const { movies } = this.state
         

@@ -49,7 +49,7 @@ const TableBody = (props) => {
     // registered an onClick listener to remove character
     const rows = props.data.map((row, index) => {
      return (
-        <tr key={index}>
+        <tr>
           <td>{row.title}</td>
           <td>{row.actors}</td>
           <td>{row.plot}</td>
