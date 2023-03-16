@@ -53,6 +53,8 @@ class App extends Component {
           dateAdded: "March 15, 2023"
         },
         ]
+        ,
+        filteredMovie :[]
     }
 
     // create simple funciton here to remove movie
@@ -87,8 +89,8 @@ removeMovie = (index) => {
       let searchResult = this.state.movies.filter((movie) => {
         return movie[searchField].includes(searchInput)
       })
-      this.setState({filteredMovie: searchResult})
-    }
+      this.setState({filteredMovie: searchResult});
+    };
 
      /* you always have a render function 
      in a component. */
@@ -102,7 +104,7 @@ removeMovie = (index) => {
     return (
         <div className="container"> 
           <Search 
-            filterMovie ={this.filterMovie}/>
+            filterMovie={this.filterMovie}/>
           <Table 
             movieData={this.state.movies} 
             removeMovie={this.removeMovie}

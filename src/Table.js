@@ -36,7 +36,7 @@ const TableHeader = () => {
                 <th>Date Added</th>
             </tr>
         </thead>
-    );
+    )
 }
 
 //Table Body Component
@@ -78,7 +78,7 @@ class Table extends Component {
            <table>
                 <TableHeader/>
                 <TableBody 
-                  data={filteredMovieData > 0  ? filteredMovieData : movieData}
+                  data={filteredMovieData.length > 0  ? filteredMovieData : movieData}
                   removeMovie={removeMovie} 
                  />
           </table>
