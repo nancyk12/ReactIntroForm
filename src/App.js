@@ -6,6 +6,7 @@ import React, { Component } from 'react'
 */
 import Table from "./Table";
 import MovieForm from "./MovieForm";
+import Search from "./Search";
 
 // delete All Button simple component 
 function DeleteAllButton(props) {
@@ -82,6 +83,13 @@ removeMovie = (index) => {
         this.setState({movies:[]})
     }
 
+    filterMovie = (searchInput, searchField) => {
+      let searchResult = this.state.movies.filter((movie) => {
+        return movie[searchField].includes(searchInput)
+      })
+      this.setState({filteredMovie: searchResult})
+    }
+
      /* you always have a render function 
      in a component. */
      
@@ -93,11 +101,14 @@ removeMovie = (index) => {
     // so table can use it later on
     return (
         <div className="container"> 
-          <DeleteAllButton deleteAll={this.removeAllMovies}/>
+          <Search 
+            filterMovie ={this.filterMovie}/>
           <Table 
             movieData={this.state.movies} 
-            removeMovie={this.removeMovie} 
+            removeMovie={this.removeMovie}
+            filteredMovieData={this.state.filteredMovie} 
           /> 
+          <DeleteAllButton deleteAll={this.removeAllMovies}/>
           <MovieForm addMovie={this.addMovie}/>
         </div>
     )

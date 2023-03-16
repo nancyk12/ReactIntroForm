@@ -71,13 +71,14 @@ class Table extends Component {
         const { 
             movieData, 
             removeMovie,
+            filteredMovieData
         } = this.props;
       
         return (
            <table>
                 <TableHeader/>
                 <TableBody 
-                  data={movieData} 
+                  data={filteredMovieData > 0  ? filteredMovieData : movieData}
                   removeMovie={removeMovie} 
                  />
           </table>
