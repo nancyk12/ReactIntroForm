@@ -1,0 +1,14 @@
+
+
+thead {
+    background-color: black;
+    color: white;
+}
+
+td {
+    border: 2px solid gray;
+}
+
+.not-found {
+    color: red;
+}
