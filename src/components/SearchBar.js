@@ -1,84 +1,62 @@
-import React, { Component } from "react";
-
-class SearchBar extends Component{
-    constructor(props){
-        super(props)
-        this.initialState = {
-            search: '',
-            field: '' 
-        }
-        this.state = this.initialState;
-    }
-
-    handleChange = event => {
-        //get name, value out of target (element that changed)
-        const { name, value } = event.target;
-
-        //update our state 
-        this.setState({
-            [name]: value
-        });
-    }
-
-    onFormSubmit = (event) => {
-        //standard code for onSubmits 
-        event.preventDefault();
-        //set the current state of our form to the handle submit
-        this.props.filterMovie(this.state.search, this.state.field);
-
-        //clear inputs by setting form to inital state
-        this.setState(this.initalState);
+import { useState } from "react";
 
 
-    }
-    render(){
-        //const {title, director} = this.state;
+function SearchBar(props){
 
-        return(
-            <div>   
-                <h1>Search</h1>
-                <form onSubmit={this.onFormSubmit}>
-                    <input 
-                        type = "text" 
-                        id="search" 
-                        name="search" 
-                        value={this.state.search}
-                        onChange = {this.handleChange}
+    // setting up the state 
+    const [input, setInput] = useState("");
+    const [field, setField] = useState("");
 
-                    />
-                    <button type = "submit" > Search</button>
-                    <br/>
-                    <label>Title</label>
-                    <input 
-                        type = "radio" 
-                        id="title" 
-                        name="field"
-                        value="title"
-                        autocomplete = "off"
-                        checked = {this.state.field === "title"}
-                        onChange = {this.handleChange}
-                    />
-                    <label>Director</label>
-                    <input 
-                        type = "radio" 
-                        id="director" 
-                        name="field"
-                        value="director"
-                        autocomplete = "off"
-                        checked = {this.state.field === "director"}
-                        onChange = {this.handleChange}
+    const handleOnSubmit = e => {
+        e.preventDefault();
+        //show filtered results, call to function in App.js 
+        props.filterMovies(input, field);
+    } 
 
-                    />
-                </form>
-
-
-            </div>
-
-
-
-        )
-    }
+    return (
+        <form onSubmit={handleOnSubmit}>
+            <label htmlFor="search">Search :</label>
+            <input 
+                type="text" 
+                id="search" 
+                name="search"
+                value={input}
+                onChange={e => setInput(e.target.value)}
+                /><br/>
+            <label htmlFor="title">Title</label>
+            <input 
+                type="radio" 
+                id="title" 
+                name="title"
+                value="title"
+                onChange={e => setField(e.target.value)}
+                checked={field === "title"}
+                />
+            <label htmlFor="actors">Actors</label>
+            <input 
+                type="radio" 
+                id="actors" 
+                name="actors"
+                value="actors"
+                onChange={e => setField(e.target.value)}
+                checked={field === "actors"}
+                />
+            <label htmlFor="plot">Plot</label>
+            <input 
+                type="radio" 
+                id="plot" 
+                name="plot"
+                value="plot"
+                onChange={e => setField(e.target.value)}
+                checked={field === "plot"}
+                />
+            <br/>
+            <button type="submit">
+                Search
+            </button>
+        </form>
+    );
 }
-//onClick={() => this.props.filterMovie(movie)}
+
 export default SearchBar;
 
