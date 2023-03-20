@@ -62,7 +62,8 @@ const TableBody = (props) => {
     return <tbody>{rows}</tbody>
 }
 // TABLE is our main Component
-const Table = (props) { //read props passed in from App.js
+const Table = (props) { 
+  //read props passed in from App.js
         const { 
             movies, 
             removeMovie,
@@ -79,6 +80,7 @@ const Table = (props) { //read props passed in from App.js
           </table>
           )
         }
+      
       
 
 export default Table
