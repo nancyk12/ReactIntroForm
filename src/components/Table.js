@@ -12,15 +12,12 @@
  * td -> table cell
  */
 
-import React, { Component } from "react";
+import React from "react";
 
 /* 
 create two simple function components to make 
 our table more readable 
 */
-
-
-
 
 //Table Header Component
 const TableHeader = () => {
@@ -65,25 +62,23 @@ const TableBody = (props) => {
     return <tbody>{rows}</tbody>
 }
 // TABLE is our main Component
-class Table extends Component {
-    render(){
-        //read props passed in from App.js
+const Table = (props) { //read props passed in from App.js
         const { 
-            movieData, 
+            movies, 
             removeMovie,
             filteredMovieData
-        } = this.props;
+        } = props;
       
         return (
            <table>
                 <TableHeader/>
                 <TableBody 
-                  data={filteredMovieData.length > 0  ? filteredMovieData : movieData}
+                  data={movies}
                   removeMovie={removeMovie} 
                  />
           </table>
           )
         }
-      }
+      
 
 export default Table
