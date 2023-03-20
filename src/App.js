@@ -4,9 +4,9 @@ import React, { Component } from 'react'
    extends inherits from React.Component
    in other words: tells App to behave like a component.
 */
-import Table from "./Table";
-import MovieForm from "./MovieForm";
-import Search from "./Search";
+import Table from "./components/Table";
+import MovieForm from "./components/MovieForm";
+import Search from "./components/Search";
 
 // delete All Button simple component 
 function DeleteAllButton(props) {
