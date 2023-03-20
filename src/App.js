@@ -7,6 +7,8 @@ import React, { Component } from 'react'
 import Table from "./components/Table";
 import MovieForm from "./components/MovieForm";
 import Search from "./components/Search";
+// adding a comment to line 10
+
 
 // delete All Button simple component 
 function DeleteAllButton(props) {
