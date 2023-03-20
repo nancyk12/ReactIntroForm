@@ -1,6 +1,6 @@
-import React, { Component} from "react";
+import React, { Component } from "react";
 
-class Search extends Component{
+class SearchBar extends Component{
     constructor(props){
         super(props)
         this.initialState = {
@@ -80,5 +80,5 @@ class Search extends Component{
     }
 }
 //onClick={() => this.props.filterMovie(movie)}
-export default Search;
+export default SearchBar;
 
