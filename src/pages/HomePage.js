@@ -1,4 +1,4 @@
-
+import { useOutletContext } from 'react-router-dom'
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -7,6 +7,8 @@ import './HomePage.css'
 
 
 const HomePage = () => {
+    const context = useOutletContext();
+    console.log(context);
     
 
 

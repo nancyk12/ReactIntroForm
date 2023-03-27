@@ -1,135 +1,92 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from 'react-bootstrap/Form';
 import Button from "react-bootstrap/Button";
 import './AddNewMoviePage.css'
+
+//let's use react-router-dom's context provider
+// to pass info to child routes
 import { useNavigate, useOutletContext } from "react-router-dom";
 
 const AddNewMoviePage = () => {
-   //set initial state  
-   const [title, setTitle] = useState("film")
-   const [actors,setActors] = useState(["actor1","actor2"])
-   const [plot,setPlot] = useState("this is a plot")
-   const [genre,setGenre] = useState("Gallo")
-   const [imdbRating,setImdbRating] = useState(0.0)
-   const [director,setDirector] = useState("A director")
-   const [year,setYear] = useState(0)
-   const [dateAdded, setDateAdded] = useState(new Date().toISOString())
 
-    
-    //reset inputs
-    const reset = () => {
-        setTitle("");
-        setActors([]);
-        setPlot("");
-        setGenre("");
-        setImdbRating(0.0);
-        setDirector("");
-        setYear(0);
-    }
+    const [movies, handleAddMovie] = useOutletContext()
+    const navigate = useNavigate()
+    const [title, setTitle] = useState('')
+    const [actors, setActors] = useState('')
+    const [plot, setPlot] = useState('')
+    const [genre, setGenre] = useState('')
+    const [imdbRating, setImdbRating] = useState('')
+    const [year, setYear] = useState('')
+    const [director, setDirector] = useState('')
 
-    const onFormSubmit = event => {
+    return(
+        <Container id="add-main" fluid>
+            <Row className="justify-content-md-center">
+                <Col lg='5'>
+                    <h1>Add a New Movie</h1>
+                    <Form.Group>
+                        <Form.Label>Title: </Form.Label>
+                        <Form.Control type="text" placeholder="Enter Title" onChange={(e) => {
+                            setTitle(e.target.value)
+                        }}/>
+                    </Form.Group>
+                    <br/>
+                    <Form.Group>
+                        <Form.Label>Actors: </Form.Label>
+                        <Form.Control type="text" placeholder="Enter Actors" onChange={(e) => {
+                            setActors(e.target.value)
+                        }}/>
+                    </Form.Group>
+                    <br/>
+                    <Form.Group>
+                        <Form.Label>Plot: </Form.Label>
+                        <Form.Control as="textarea" rows={3} placeholder="Enter Plot" onChange={(e) => {
+                            setPlot(e.target.value)
+                        }}/>
+                    </Form.Group>
+                    <br/>
+                    <Form.Group>
+                        <Form.Label>Genre: </Form.Label>
+                        <Form.Control type="text" placeholder="Enter Title" onChange={(e) => {
+                            setGenre(e.target.value)
+                        }}/>
+                    </Form.Group>
+                    <br/>
+                    <Form.Group>
+                        <Form.Label>IMDb Rating: </Form.Label>
+                        <Form.Control type="text" placeholder="Enter IMDb Rating" onChange={(e) => {
+                            setImdbRating(e.target.value)
+                        }}/>
+                    </Form.Group>
+                    <br/>
+                    <Form.Group>
+                        <Form.Label>Year: </Form.Label>
+                        <Form.Control type="text" placeholder="Enter Year" onChange={(e) => {
+                            setYear(e.target.value)
+                        }}/>
+                    </Form.Group>
+                    <br/>
+                    <Form.Group>
+                        <Form.Label>Director: </Form.Label>
+                        <Form.Control type="text" placeholder="Enter Director" onChange={(e) => {
+                            setDirector(e.target.value)
+                        }}/>
+                    </Form.Group>
+                    <br/>
+                    <Button variant="dark" onClick={() => {
+                        console.log(title, actors, plot, genre, imdbRating, year, director)
+                        handleAddMovie(title, actors.split(','), plot, genre, imdbRating, year, director)
+                        navigate('/all-movies')
+                    }}>Submit</Button>
 
-        event.preventDefault();
-        const newDate = new Date().toISOString();
-        
-        props.addMovie({
-            title, 
-            actors, 
-            plot,
-            genre,
-            imdbRating,
-            director,
-            year,
-            newDate
-        });
-        console.log(newDate);
-
-        //clear inputs by setting form to inital state
-        setDateAdded(newDate);
-        reset();
-    
-    }
-
-   
-    return (
-        <form onSubmit={onFormSubmit}>
-            <label htmlFor="title">Title :</label>
-            <input 
-                type="text" 
-                id="title" 
-                name="title"
-                value={title}
-                onChange={e => setTitle(e.target.value)}
-                /><br/>
-            <label htmlFor="actors">Actors:</label>
-            <input 
-                type="text" 
-                id="actors" 
-                name="actors"
-                
-                value={actors} 
-                onChange={e => setActors(e.target.value)}
-                />
-            <br/>
-             <label htmlFor="plot">Plot:</label>
-             <input 
-                type="text" 
-                id="plot" 
-                name="plot"
-                value={plot} 
-                onChange={e => setPlot(e.target.value)}
-                /><br/>
-             <label htmlFor="genre">Genre:</label>
-             <input 
-                type="text" 
-                id="genre" 
-                name="genre"
-                value={genre} 
-                onChange={e => setGenre(e.target.value)}
-                />
-                <br/>
-            <label htmlFor="imdbRating">imdbRating:</label>
-             <input 
-                type="text" 
-                id="imdbRating" 
-                name="imdbRating"
-                value={imdbRating} 
-                onChange={e => setImdbRating(e.target.value)}
-                />
-            <br/>
-            <label htmlFor="director">Director:</label>
-             <input 
-                type="text" 
-                id="director" 
-                name="director"
-                value={director} 
-                onChange={e => setDirector(e.target.value)}
-                />
-            <br/>
-            <label htmlFor="year">Year:</label>
-             <input 
-                type="text" 
-                id="year" 
-                name="year"
-                value={year} 
-                onChange={e => setYear(e.target.value)}
-            />
-             <br/>
-            <button type="submit">
-                Submit
-            </button>
-        </form>
-    );
-
-        
+                </Col>
+            </Row>
+        </Container>
+    )
 
 }
 
-
-
-
-
-export default AddNewMoviePage;
+export default AddNewMoviePage

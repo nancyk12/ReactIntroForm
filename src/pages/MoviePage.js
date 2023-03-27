@@ -1,23 +1,41 @@
+import { useOutletContext, useParams } from "react-router-dom";
+import Card from 'react-bootstrap/Card';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
-import { Outlet, useNavigate, useOutletContext  } from "react-router-dom";
+const SingleMoviePage = () => {
 
-const MoviePage = () => {
-    const [movies] = useOutletContext();
-    const navigate = useNavigate();
-    return (
-        <div>
-            <h1>Movie</h1>
-            <select onChange={(e) => {
-                navigate(`/MoviePage/${e.target.value}`);
-            }}>
-                <option></option>
-                {movies.map((movie) => {
-                    return (<option value={movie.title}>{movie.title}</option>)
-                })}
-            </select>
-            <Outlet context={[movies]} />
-        </div>
+    const allMovies = useOutletContext()
+    const params = useParams()
+
+    let movie = allMovies[0].find((movie) =>{
+            return movie.title === params.filmTitle
+        }
     )
+
+    return(
+        <Container fluid>
+            <Row  className="justify-content-md-center">
+                <Col>
+                    <Card className="text-center">
+                        <Card.Body>
+                            <Card.Title>{movie.title}</Card.Title>
+                            <Card.Text>Actors: {movie.actors.join(', ')}</Card.Text>
+                            <Card.Text>Plot: {movie.plot}</Card.Text>
+                            <Card.Text>Genre: {movie.genre}</Card.Text>
+                            <Card.Text>IMDB Rating: {movie.imdbRating}</Card.Text>
+                            <Card.Text>Year: {movie.year}</Card.Text>
+                            <Card.Text>Director: {movie.director}</Card.Text>
+                        </Card.Body>
+                    </Card>   
+                </Col>
+            </Row>
+        </Container>
+        
+        
+    )
+
 }
 
-export default MoviePage;
+export default SingleMoviePage
