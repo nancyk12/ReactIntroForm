@@ -1,46 +1,53 @@
-
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
-import {
-    createBrowserRouter,
-    RouterProvider,
-} from "react-router-dom";
-import "./index.css";
 import HomePage from "./pages/HomePage";
-import MoviePage from "./pages/MoviePage";
 import MovieTablePage from "./pages/MovieTablePage";
-import AddNewMoviePage from "./pages/AddNewMoviePage";
+import OneMoviePage from "./pages/OneMoviePage";
+import AddMoviePage from "./pages/AddMoviePage";
+import MovieSearch from "./pages/MovieSearch";
+import MovieCard from "./components/MovieCard";
+import App from "./App"
+import "./index.css";
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
-        {
-            index:true,
-            element: <HomePage />
-        },
-        {
-            path: "/all-movies",
-            element: <MovieTablePage/>
-        },
-        {
-            path: "/single-movie",
-            element: <MoviePage/>
-        },
-        {
-            path: "/add-movie",
-            element: <AddNewMoviePage/>
-        }
+      {
+        index: true,
+        element: <HomePage />
+      },
+      {
+        path: "/allMovies",
+        element: <MovieTablePage/>
+      },
+      {
+        path: "/addMovie",
+        element: <AddMoviePage/>
+      },
+      {
+        path: "/MovieSearch",
+        element: <MovieSearch/>,
+        children: [
+          {
+            path: "/MovieSerch/:title",
+            element: <MovieCard />
+          } 
+        ]
+      }
     ]
-  }
+  },
 ]);
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <RouterProvider router={router} />
   </React.StrictMode>
 );
-
 

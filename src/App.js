@@ -1,16 +1,17 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import NavBar from "./components/Navbar";
+import "./App.css"
+//usign react-router's built in context provider
+// that makes the context accessible to all child routes across the application
+import { Outlet } from 'react-router-dom';
 
-import { Outlet } from "react-router-dom";
 /* class-based component called App
    extends inherits from React.Component
    in other words: tells App to behave like a component.
 */
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Table from "./components/Table";
-import MovieForm from "./components/MovieForm";
-import SearchBar from "./components/SearchBar";
-import NavBar from "./components/NavBar";
+//import NavBar from "./components/NavBar";
 
 
 
@@ -49,7 +50,7 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar />
+      <NavBar/>
       <Outlet context={[movies, handleAddMovie, setSearchResults, searchResults]}/>
     </div>
   );
