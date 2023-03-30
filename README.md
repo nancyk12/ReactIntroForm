@@ -1,3 +1,12 @@
+Part 2
+Revisit the Movie App,
+Create the following:
+- Home Page for Movie App
+- MovieListPage -> shows films
+- MoviePage -> shows the details of one film
+(the route should use a dynamic variable /:filmTitle)
+- Navbar to go between them
+
 Instructions:
 Create a new react project following the steps in the Repo (https://github.com//dd-code-immersives/movie-project/tree/main)
 

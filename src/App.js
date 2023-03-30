@@ -1,124 +1,67 @@
-import React, { Component } from 'react'
+import React from "react";
+import { useState, useEffect } from "react";
+import NavBar from "./components/NavBar";
+import "./App.css"
+
+//import movie data file
+//import movies from "./data/movies.json";
+//usign react-router's built in context provider
+// that makes the context accessible to all child routes across the application
+import { Outlet } from 'react-router-dom';
 
 /* class-based component called App
    extends inherits from React.Component
    in other words: tells App to behave like a component.
 */
-import Table from "./components/Table";
-import MovieForm from "./components/MovieForm";
-import Search from "./components/Search";
+import 'bootstrap/dist/css/bootstrap.min.css'
+// adding a comment to line 10
 
-// delete All Button simple component 
-function DeleteAllButton(props) {
-    return <button onClick={() => props.deleteAll()}> Delete All </button>
-  }
+const DATA_URL = "https://raw.githubusercontent.com/dd-code-immersives/movie-project/main/react-intro-form/data/movies.json"
 
-class App extends Component {
-    //set initial state of components
-    state = {
-        movies: [ {
-            title: 'Star Wars',
-            actors: 'Harrison Ford',
-            plot: "Sci-Fi",
-            imdbRating: "5",
-            director: "George Lucas",
-            year: "1977",
-            dateAdded: "March 15, 2023"
-        },
-        {
-          title: 'Pretty Woman',
-          actors: 'Julia Roberts',
-          plot: "Romantic Comedy",
-          imdbRating: "5",
-          director: "Gary Marshall",
-          year: "1990",
-          dateAdded: "March 15, 2023"
-        },
-        {
-          title: 'ET',
-          actors: 'Drew Brrymore',
-          plot: "Sci-Fi",
-          imdbRating: "5",
-          director: "Steven Spielberg",
-          year: "1982",
-          dateAdded: "March 15, 2023"
-        },
-        {
-          title: 'The Wizard of Oz',
-          actors: 'Judy Garland',
-          plot: "Fantasy",
-          imdbRating: "5",
-          director: "Victor Flemings",
-          year: "1939",
-          dateAdded: "March 15, 2023"
-        },
-        ]
-        ,
-        filteredMovie :[]
-    }
+function App() {
 
-    // create simple funciton here to remove movie
-removeMovie = (index) => {
-    // now that we've defined this.state, we can use
-        const { movies } = this.state
-        
-        // we can use setState up update the state
-        this.setState({
-            //removed movie at passed in index by
-            //returning a new list excluding that movie
-            movies: movies.filter((_, i) => {
-                return i !== index
-            }),
-        })
-    }
-    //we add the handle submit here, because
-    // the movies in here
-    //NOTE ON SYNTAX: passing a movie to addMovie
-    // using (...) spread operator to unpack movies array and adding 
-    // a new movie
-    addMovie =  movie => {
-        this.setState({movies: [...this.state.movies, movie ]})
-    }
+  const [movies, setMovies] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
+  
 
-    //delete all the movies
-    removeAllMovies = () => {
-        this.setState({movies:[]})
-    }
+  useEffect(() => {
+    fetch(DATA_URL)
+    .then((result) => result.json())
+    .then((result) => {
+      setMovies(result)
+    })
+  }, [])
 
-    filterMovie = (searchInput, searchField) => {
-      let searchResult = this.state.movies.filter((movie) => {
-        return movie[searchField].includes(searchInput)
-      })
-      this.setState({filteredMovie: searchResult});
+  const handleAddMovie = (
+    title, 
+    actors, 
+    plot, 
+    genre, 
+    imdbRating, 
+    year, 
+    director
+    ) => {
+    const newMovie = {
+      title,
+      actors,
+      plot,
+      genre,
+      imdbRating,
+      year,
+      director
     };
 
-     /* you always have a render function 
-     in a component. */
-     
-  render() {
-
-    //make sure return only returns one html element!
-    // we are passing the movies from state
-    // and the removeMovie function that we wrote
-    // so table can use it later on
-    return (
-        <div className="container"> 
-          <Search 
-            filterMovie={this.filterMovie}/>
-          <Table 
-            movieData={this.state.movies} 
-            removeMovie={this.removeMovie}
-            filteredMovieData={this.state.filteredMovie} 
-          /> 
-          <DeleteAllButton deleteAll={this.removeAllMovies}/>
-          <MovieForm addMovie={this.addMovie}/>
-        </div>
-    )
+    setMovies([...movies, newMovie])
   }
+
+  return (
+    <div className="App">
+      <NavBar/>
+      <Outlet context={{movies, handleAddMovie, setSearchResults, searchResults}}
+      />
+    </div>
+  );
+  
 }
 
-
-
-
-// make it accessible to the rest of your application
 export default App

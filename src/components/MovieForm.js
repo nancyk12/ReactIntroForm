@@ -1,118 +1,132 @@
-import React, { Component} from "react";
+import { useOutletContext } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
+const MovieForm = () => {
+    //set the initial state of the Form
+    const navigate = useNavigate();
+    const [title, setTitle] = useState("");
+    const [actors, setActors] = useState("");
+    const [plot, setPlot] = useState("");
+    const [imdbRating, setimdb] = useState("");
+    const [director, setDirector] = useState("");
+    const [year, setYear] = useState("");
+    const [dateAdded] = useState(Date().toString());
+    const { handleAddMovie } = useOutletContext();
 
-
-class MovieForm extends Component {
-
-    //constructors are initialized when Form is created (instantiated)
-    // we set the initial state of our form and save it to state.
-    constructor(props){
-        super(props); //inheriting props from Component
-
-        // set the initial state of the Form
-        this.initialState = {
-            title: '',
-            actors: '',
-            plot:'',
-            imdbRating: '',
-            director: '',
-            year: '',
-            dateAdded:`${new Date()}`
-          
-        };
-    //set our initial state to state.
-    this.state = this.initialState;
-    }
-
-    handleChange = event => {
-        //get name, value out of target (element that changed)
-        const { name, value } = event.target;
-        
-        //update our state
-        this.setState({
-            [name]: value
-        });
-    }
-
-    onFormSubmit = (event) => { //(e) stands for event
-       //standard code for event listeners
-        event.preventDefault();
-        const newDate = new Date().toString();
-        this.setState({date:newDate});
-        //set the current state or our form to the handle submit
-        this.props.addMovie(this.state);
-
-        //clear inputs by setting forms to initial state
-        this.initialState.date = newDate;
-        this.setState(this.initialState);
-    }
-render(){
-    //hook in data from state
-    const { title, actors, plot, imdbRating, director, year, dateAdded } = this.state;
+  
     return (
-        <form onSubmit={this.onFormSubmit}>
-        <label htmlFor="title">Title:</label><br/>
-        <input 
-           type="text" 
-           id="title" 
-           name="title"
-           value={title}
-           onChange={this.handleChange}
-           /><br/>
-        <label htmlFor="actors">Actors:</label><br/>
-        <input 
-           type="text" 
-           id="actors" 
-           name="actors"
-           value={actors}
-           onChange={this.handleChange}
-           /><br/>
-        <label htmlFor="plot">Plot:</label><br/>
-        <input 
-           type="text" 
-           id="plot" 
-           name="plot"
-           value={plot}
-           onChange={this.handleChange}
-           /><br/>
-        <label htmlFor="imdbRating">IMDB Rating:</label><br/>
-        <input 
-           type="text" 
-           id="imdbRating" 
-           name="imdbRating"
-           value={imdbRating}
-           onChange={this.handleChange}
-           /><br/>   
-        <label htmlFor="director">Director:</label><br/>
-        <input 
-           type="text" 
-           id="director" 
-           name="director"
-           value={director}
-           onChange={this.handleChange}
-           /><br/>  
-        <label htmlFor="year">Year:</label><br/>
-        <input 
-           type="text"
-           id="year" 
-           name="year"
-           value={year}
-           onChange={this.handleChange}
-           /><br/>
-        <label htmlFor="dateAdded">Date Added:</label><br/>
-        <input 
-           type="text" 
-           id="dateAdded" 
-           name="dateAdded"
-           value={dateAdded}
-           onChange={this.handleChange}
-           /><br/>
-        <button type="submit">
-            Submit
-        </button>   
-    </form>
-    )
-};
-};
-
+      // const {title, setTitle} = useState("");
+      // const {actors, setActors} = useState("");
+      // const {plot, setPlot} = useState("");
+      // const {imdbRating, setimdb} = useState("");
+      // const {director, setDirector} = useState("");
+      // const {year, setYear} = useState("");
+      // const {dateAdded, setDateAdded} = useState(Date().toString());
+  
+      <div>
+        {/*<style type="text/css">
+          {`
+               
+                 
+                input{
+                  display: flex;
+                  justify-content:center;
+                   align-items:center;
+                
+                }
+                textarea {
+                  display: flex;
+                  justify-content:center;
+                   align-items:center;
+                }
+                label {
+                background-color: light-blue;
+                height: 25px;
+                width: 100px;
+                }
+                  `}
+        </style>*/}
+        <label>
+          <h3>Title</h3>
+        </label>
+        <input
+          type="text"
+          onChange={(e) => {
+            setTitle(e.target.value);
+          }}
+        />
+        <br />
+        <label>
+          <h3>Actors</h3>
+        </label>
+        <input
+          type="text"
+          onChange={(e) => {
+            setActors(e.target.value);
+          }}
+        />
+        <br />
+        <label>
+          <h3>Plot</h3>
+        </label>
+        <textarea
+          type="text"
+          onChange={(e) => {
+            setPlot(e.target.value);
+          }}
+        />
+        <br />
+        <label>
+          <h3>imdbRating</h3>
+        </label>
+        <input
+          type="text"
+          onChange={(e) => {
+            setimdb(e.target.value);
+          }}
+        />
+        <br />
+        <label>
+          <h3>Director</h3>
+        </label>
+        <input
+          type="text"
+          onChange={(e) => {
+            setDirector(e.target.value);
+          }}
+        />
+        <br />
+        <label>
+          <h3>Year</h3>
+        </label>
+        <input
+          type="text"
+          onChange={(e) => {
+            setYear(e.target.value);
+          }}
+        />
+        <br />
+        <button
+          onClick={() => {
+            const movie = {
+              title: title,
+              actors: actors,
+              plot: plot,
+              imdbRating: imdbRating,
+              director: director,
+              year: year,
+              dateAdded: dateAdded,
+            };
+  
+            handleAddMovie(movie);
+            navigate("/movielist");
+          }}
+        >
+          Submit
+        </button>
+      </div>
+    );
+  };
+  
 export default MovieForm
