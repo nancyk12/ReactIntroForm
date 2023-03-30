@@ -2,7 +2,6 @@ import { useOutletContext } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 const MovieForm = () => {
     //set the initial state of the Form
     const navigate = useNavigate();
@@ -13,7 +12,8 @@ const MovieForm = () => {
     const [director, setDirector] = useState("");
     const [year, setYear] = useState("");
     const [dateAdded] = useState(Date().toString());
-    const { addMovie } = useOutletContext();
+    const { handleAddMovie } = useOutletContext();
+
   
     return (
       // const {title, setTitle} = useState("");
@@ -119,7 +119,7 @@ const MovieForm = () => {
               dateAdded: dateAdded,
             };
   
-            addMovie(movie);
+            handleAddMovie(movie);
             navigate("/movielist");
           }}
         >

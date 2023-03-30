@@ -1,14 +1,5 @@
 
 
-/**
- * HTML REVIEW
- * thead -> table head 
- * tr -> table row 
- * th -> table header 
- * tbody -> table body
- * td -> table cell
- */
-
 import React from "react";
 //import { useState } from "react-router-dom";
 //import { Link } from "react-router-dom"; 
@@ -35,8 +26,7 @@ import React from "react";
  
  //TABLE BODY SIMPLE COMPONENT 
  const TableBody = (props) => {
- 
- 
+
      //construct rows
      // use map to iterate over each row and wrap it in
      // a html table row  
@@ -54,36 +44,27 @@ import React from "react";
            <td>{row.dateAdded}</td>
           <td><button onClick={() => props.removeMovie(index)}> Delete</button></td> 
          </tr>
-       )
-     })
+       );
+     });
      //return rows wrapped in tbody
      return <tbody>{rows}</tbody>
-   }
-
-
+   };
 
  // MovieTable is our main Component
  const Table = (props) => {
-
-    const { 
-      movies,
-      removeMovie
-    } = props;
+    const { movies } = props;
 
     return ( 
-
-
-      <Table striped bordered hover responsive="lg" >
+      <div stripped bordered hover responsive="lg">
         <TableHeader/>
         <TableBody 
           data={movies} 
-          removeMovie={removeMovie}
+          //removeMovie={removeMovie}
         />
-    </Table>
+   </div>
 
     )
  }
-
 
  export default Table;
 

@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 import NavBar from "./components/NavBar";
 import "./App.css"
 
-//import movie data filef
-import movies from "./data/movies.json";
+//import movie data file
+//import movies from "./data/movies.json";
 //usign react-router's built in context provider
 // that makes the context accessible to all child routes across the application
 import { Outlet } from 'react-router-dom';
@@ -14,11 +14,6 @@ import { Outlet } from 'react-router-dom';
    in other words: tells App to behave like a component.
 */
 import 'bootstrap/dist/css/bootstrap.min.css'
-
-
-
-
-
 // adding a comment to line 10
 
 const DATA_URL = "https://raw.githubusercontent.com/dd-code-immersives/movie-project/main/react-intro-form/data/movies.json"
@@ -37,7 +32,15 @@ function App() {
     })
   }, [])
 
-  const handleAddMovie = (title, actors, plot, genre, imdbRating, year, director) => {
+  const handleAddMovie = (
+    title, 
+    actors, 
+    plot, 
+    genre, 
+    imdbRating, 
+    year, 
+    director
+    ) => {
     const newMovie = {
       title,
       actors,
@@ -46,7 +49,7 @@ function App() {
       imdbRating,
       year,
       director
-    }
+    };
 
     setMovies([...movies, newMovie])
   }
@@ -54,7 +57,8 @@ function App() {
   return (
     <div className="App">
       <NavBar/>
-      <Outlet context={[movies, handleAddMovie, setSearchResults, searchResults]}/>
+      <Outlet context={{movies, handleAddMovie, setSearchResults, searchResults}}
+      />
     </div>
   );
   
