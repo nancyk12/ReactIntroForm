@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import HomePage from "./pages/HomePage";
-import MovieTablePage from "./pages/MovieTablePage";
-import OneMoviePage from "./pages/OneMoviePage";
+import ErrorPage from "./pages/ErrorPage";
 import AddMoviePage from "./pages/AddMoviePage";
+import MovieTablePage from "./pages/MovieTablePage";
 import MovieSearch from "./pages/MovieSearch";
-import MovieCard from "./components/MovieCard";
+//simport MovieCard from "./components/MovieCard";
 import App from "./App"
-import "./index.css";
+//import "./index.css";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -21,25 +21,30 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <HomePage />
-      },
-      {
-        path: "/allMovies",
-        element: <MovieTablePage/>
+        element: <HomePage />,
+        errorElement:<ErrorPage />
       },
       {
         path: "/addMovie",
-        element: <AddMoviePage/>
+        element: <AddMoviePage/>,
+        errorElement:<ErrorPage />
       },
       {
+        path: "/allMovies",
+        element: <MovieTablePage/>,
+        errorElement:<ErrorPage />
+      },
+
+     {
         path: "/MovieSearch",
-        element: <MovieSearch/>,
-        children: [
+        element: <MovieSearch/>, 
+        
+       /* children: [
           {
             path: "/MovieSerch/:title",
             element: <MovieCard />
           } 
-        ]
+        ]*/
       }
     ]
   },

@@ -1,7 +1,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import NavBar from "./components/Navbar";
+import NavBar from "./components/NavBar";
 import "./App.css"
+
+//import movie data filef
+import movies from "./data/movies.json";
 //usign react-router's built in context provider
 // that makes the context accessible to all child routes across the application
 import { Outlet } from 'react-router-dom';
@@ -11,7 +14,7 @@ import { Outlet } from 'react-router-dom';
    in other words: tells App to behave like a component.
 */
 import 'bootstrap/dist/css/bootstrap.min.css'
-//import NavBar from "./components/NavBar";
+
 
 
 

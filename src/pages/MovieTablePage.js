@@ -2,9 +2,9 @@
 import Table from '../components/Table';
 
 const MovieTablePage = () => {
-    
+
       return (
-        <div>
+        <div className="container">
           <Table />
         </div>
       );

@@ -1,20 +1,25 @@
-import { useState } from "react";
 
+
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+// import movieStyle from "../pages/movieStyle.css"
 
 function SearchBar(props){
 
     // setting up the state 
     const [input, setInput] = useState("");
     const [field, setField] = useState("");
+    const navigate = useNavigate();
 
     const handleOnSubmit = e => {
         e.preventDefault();
         //show filtered results, call to function in App.js 
         props.filterMovies(input, field);
+        navigate(`/MoviePage`)
     } 
 
     return (
-        <form onSubmit={handleOnSubmit}>
+        <form id="movie-search" onSubmit={handleOnSubmit}>
             <label htmlFor="search">Search :</label>
             <input 
                 type="text" 
@@ -22,7 +27,7 @@ function SearchBar(props){
                 name="search"
                 value={input}
                 onChange={e => setInput(e.target.value)}
-                /><br/>
+                />
             <label htmlFor="title">Title</label>
             <input 
                 type="radio" 
@@ -50,7 +55,6 @@ function SearchBar(props){
                 onChange={e => setField(e.target.value)}
                 checked={field === "plot"}
                 />
-            <br/>
             <button type="submit">
                 Search
             </button>

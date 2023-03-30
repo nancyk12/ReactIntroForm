@@ -25,7 +25,7 @@ const MovieForm = () => {
       // const {dateAdded, setDateAdded} = useState(Date().toString());
   
       <div>
-        <style type="text/css">
+        {/*<style type="text/css">
           {`
                
                  
@@ -46,7 +46,7 @@ const MovieForm = () => {
                 width: 100px;
                 }
                   `}
-        </style>
+        </style>*/}
         <label>
           <h3>Title</h3>
         </label>

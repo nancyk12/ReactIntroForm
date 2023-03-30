@@ -8,9 +8,11 @@ const NavBar = () => {
 <div>
     <header className="header">  
         <Link to="/">Home</Link>
-        <Link to="/allMovies">Movie List</Link>
-        <Link to="/addMovie">Add Movie</Link>
         <Link to="/MovieSearch">Search for a Movie</Link>
+        <Link to="/addMovie">Add Movie</Link>
+        <Link to="/allMovies">Movie List</Link>
+        
+        
     </header>   
 </div>
 

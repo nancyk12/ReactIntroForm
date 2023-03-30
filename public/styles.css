@@ -1,4 +1,28 @@
-
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 5rem;
+    margin-top: 100px;
+    background-color: #FFF7ED;
+    font-family: "Inter", sans-serif;
+  }
+  
+  body::-webkit-scrollbar {
+  display: none;
+  }
+  
+  body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  }
+  
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+  
 
 thead {
     background-color: black;
