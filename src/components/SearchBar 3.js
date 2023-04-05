@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
+// import movieStyle from "../pages/movieStyle.css"
 
 function SearchBar(props){
 
@@ -14,7 +14,7 @@ function SearchBar(props){
         e.preventDefault();
         //show filtered results, call to function in App.js 
         //props.filterMovies(input, field);
-        navigate(`/MovieTablePage`)
+        navigate(`/MoviePage`)
     } 
 
     return (
